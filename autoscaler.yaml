@@ -1,0 +1,37 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: devops-cluster
+  region: ap-southeast-1
+
+nodeGroups:
+  - name: ng-stateful
+    instanceType: t2.small
+    privateNetworking: true
+    availabilityZones: ["ap-southeast-1a"]
+    desiredCapacity: 2
+    maxSize: 3
+    volumeSize: 8
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      type: stateful
+    ssh: 
+      publicKeyName: sg
+ 
+  - name: ng-stateless
+    instanceType: t2.small
+    privateNetworking: true
+    availabilityZones: ["ap-southeast-1a","ap-southeast-1b","ap-southeast-1c"]
+    desiredCapacity: 1
+    maxSize: 2
+    volumeSize: 8
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      type: stateless
+    ssh: 
+      publicKeyName: sg
