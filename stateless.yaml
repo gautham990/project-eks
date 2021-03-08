@@ -10,6 +10,7 @@ nodeGroups:
     instanceType: t2.small
     privateNetworking: true
     desiredCapacity: 3
+    volumeSize: 8
     labels:
       type: stateless
     ssh: 
